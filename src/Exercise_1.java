@@ -1,5 +1,4 @@
-import java.util.ArrayList;
-import java.util.List;
+
 import java.util.Scanner;
 
 public class Exercise_1 {
@@ -19,9 +18,10 @@ public class Exercise_1 {
             System.out.println("Table is empty.\n");
         }else {
 
-            int count = 1, tempCount;
+            int count = 1;
+            int tempCount;
             int number = numberArray[0];
-            int temp = 0;
+            int temp ;
 
             for (int i = 0; i < (numberArray.length - 1); i++)
             {
