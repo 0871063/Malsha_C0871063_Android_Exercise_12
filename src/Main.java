@@ -1,7 +1,8 @@
 import java.util.Scanner;
 
 public class Main {
-    static final String ALPHABET = "abcdefghijklmnopqrstuvwxyz";
+    static final String alphabet = "abcdefghijklmnopqrstuvwxyz";
+    static final String ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     static final int SHIFT = 4;
     static Scanner scanner = new Scanner(System.in);
 
@@ -13,15 +14,39 @@ public class Main {
         String toEncode = "";
         // the coded string
         String chainCode = "";
-/******************************************* *******************************************/
-// write your program in this between
-/******************************************* *******************************************/
-        System.out.format("the initial chain was : '%s'\n", s);
+
+        toEncode = s.replaceAll("[^a-zA-Z ]","");
+        chainCode = getChainCode(toEncode);
+
+        System.out.format("The initial chain was : '%s'\n", s);
         if (toEncode.isEmpty()) {
-            System.out.println("the string to encode is empty.\n");
+            System.out.println("The string to encode is empty.\n");
         } else {
-            System.out.format("the string to encode is : '%s'\n", toEncode);
-            System.out.format("the coded string is : '%s'\n", chainCode);
+
+            System.out.format("The string to encode is : '%s'\n", toEncode);
+            System.out.format("The coded string is : '%s'\n", chainCode);
         }
+    }
+
+    static String getChainCode(String message){
+
+        String cipherText = "" ;
+        for (int i = 0; i < message.length(); i++) {
+            String character = Character.toString(message.charAt(i));
+            if (alphabet.contains(character)) {
+                int charPosition = alphabet.indexOf(message.charAt(i));
+                int keyVal = (SHIFT + charPosition) % 26;
+                char replaceVal = alphabet.charAt(keyVal);
+                cipherText += replaceVal;
+            }else if (ALPHABET.contains(character)) {
+                int charPosition = ALPHABET.indexOf(message.charAt(i));
+                int keyVal = (SHIFT + charPosition) % 26;
+                char replaceVal = ALPHABET.charAt(keyVal);
+                cipherText += replaceVal;
+            } else {
+                cipherText += " ";
+            }
+        }
+        return cipherText;
     }
 }
